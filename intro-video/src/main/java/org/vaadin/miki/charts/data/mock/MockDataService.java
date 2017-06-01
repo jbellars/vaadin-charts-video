@@ -30,11 +30,25 @@ public class MockDataService implements PriceService, BookService {
 
 	@Override
 	public Collection<Book> getBooks() {
-		return Arrays.asList(new Book("The Witcher", new Person("Andrzej Sapkowski")),
-				new Book("Solaris", new Person("Stanisław Lem")), new Book("1984", new Person("George Orwell")),
-				new Book("Brave New World", new Person("Aldus Huxley")),
-				new Book("The Painted Man", new Person("Peter V. Brett")),
-				new Book("The God Delusion", new Person("Richard Dawkins")));
-	}
+		return Arrays.asList(new Book("Verily, Verily: The KJV - 400 Years of Influence and Beauty", new Person("Jon Sweeney")),
+                             new Book("The Memory Code", new Person("Lynne Kelly")),
+                             new Book("Parenting Your Powerful Child: Bringing an End to the Everyday Battles",
+                                      new Person("Kevin Leman")),
+                             new Book(
+                                     "Reformation Anglicanism: A Vision for Today's Global Communion",
+                                     new Person("Michael Jensen")),
+                             new Book("Winds of Jingjiao: Studies on Syriac Christianity in China and Central Asia",
+                                      new Person("Li Tang")),
+                             new Book(
+                                     "Hidden Treasures And Intercultural Encounters: Studies On East Syriac " +
+                                             "Christianity In China And Central Asia",
+                                     new Person("Dietmar W. Winkler")),
+                             new Book("Prayer: Experiencing Awe and Intimacy with God",
+                                      new Person("Timothy J. Keller")),
+                             new Book("The Day the Revolution Began: Reconsidering the Meaning of Jesus' Crucifixion",
+                                      new Person("N.T. Wright")),
+                             new Book("The Bruised Reed", new Person("Richard Sibbes")),
+                             new Book("The Way of the Dragon or the Way of the Lamb", new Person("Kyle Strobel")));
+    }
 
 }

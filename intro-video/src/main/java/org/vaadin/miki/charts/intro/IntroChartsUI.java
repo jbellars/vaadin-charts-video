@@ -46,10 +46,35 @@ public class IntroChartsUI extends UI {
 
         List<DataProviderSeries<BookPrice>> seriesList = new ArrayList<DataProviderSeries<BookPrice>>();
 
-        for(Book book: books) {
-            seriesList.add(returnSeries(book, service));
-        }
+        populateSeriesWithBookInfo(books, seriesList);
 
+        addSeriesToCharts(seriesList);
+
+        addChartsToLayout(layout);
+
+        setContent(layout);
+    }
+
+    /**
+     * Add each configured chart from the chartList to the layout.
+     *
+     * @param layout
+     */
+    private void addChartsToLayout(VerticalLayout layout)
+    {
+        for (Chart chart : chartConfigurationList)
+        {
+            layout.addComponents(chart);
+        }
+    }
+
+    /**
+     * Add each series of coordinates to each of the specified charts.
+     *
+     * @param seriesList
+     */
+    private void addSeriesToCharts(List<DataProviderSeries<BookPrice>> seriesList)
+    {
         for(DataProviderSeries<BookPrice> series : seriesList)
         {
             for(Chart chart : chartConfigurationList)
@@ -58,15 +83,24 @@ public class IntroChartsUI extends UI {
                 config.addSeries(series);
             }
         }
-
-        for (Chart chart : chartConfigurationList)
-        {
-            layout.addComponents(chart);
-        }
-
-        setContent(layout);
     }
 
+    /**
+     * Add the data for each book to the list of series coordinates.
+     * 
+     * @param books
+     * @param seriesList
+     */
+    private void populateSeriesWithBookInfo(Collection<Book> books, List<DataProviderSeries<BookPrice>> seriesList)
+    {
+        for(Book book: books) {
+            seriesList.add(returnSeries(book, service));
+        }
+    }
+
+    /**
+     * Loads every enum of the available chart types.
+     */
     private void buildListOfChartsAndConfigurations()
     {
         addConfigurationToList(ChartType.AREA);
@@ -95,6 +129,11 @@ public class IntroChartsUI extends UI {
         addConfigurationToList(ChartType.WATERFALL);
     }
 
+    /**
+     * Adds the basic requisite configuration information for the chart.
+     *
+     * @param chartType
+     */
     private void addConfigurationToList(ChartType chartType)
     {
         Chart chart = new Chart(chartType);
@@ -104,6 +143,13 @@ public class IntroChartsUI extends UI {
         chartConfigurationList.add(chart);
     }
 
+    /**
+     * Returns a series of prices for each book for the specified years.
+     *
+     * @param book
+     * @param service
+     * @return
+     */
     private static DataProviderSeries<BookPrice> returnSeries(Book book, MockDataService service)
     {
         Collection<BookPrice> prices = service.getPrices(book, 2011, 2012, 2013, 2014, 2015, 2016, 2017);
